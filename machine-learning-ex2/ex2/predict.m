@@ -17,8 +17,9 @@ p = zeros(m, 1);
 
 
 
-
-
+predictions = sigmoid(X * theta);
+pos = find(predictions >= 0.5);
+p(pos, :) = 1;
 
 
 % =========================================================================

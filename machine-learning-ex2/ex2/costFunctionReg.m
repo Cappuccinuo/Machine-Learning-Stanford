@@ -22,7 +22,7 @@ temp_theta = theta;
 temp_theta(1) = 0;
 reg = (lambda / (2 * m)) * (temp_theta' * temp_theta);
 J = -1/m * (y' * log(predictions) + (1 - y)' * log(1 - predictions)) + reg;
-grad = 1/m * X' * (predictions - y);
+grad = 1/m * X' * (predictions - y) + lambda/m * temp_theta;
 
 
 

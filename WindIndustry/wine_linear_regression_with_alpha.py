@@ -3,7 +3,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from Utilities import Utilities
 np.set_printoptions(suppress=True)
-from sklearn.metrics import r2_score
 
 class wine_regression:
   func = Utilities()
@@ -23,15 +22,16 @@ class wine_regression:
   x0 = np.ones(m)
   X = np.insert(f, 0, values=x0, axis=1)
   C = np.zeros(12)
-  alpha = 0.0005
+  A = np.ones(1300)
+  alpha = 0.0003
 
   test_len = len(t)
   tx0 = np.ones(test_len)
   TX = np.insert(t, 0, values=tx0, axis=1)
 
-  initial_cost = func.cost_function(X, Y, C)
+  initial_cost = func.cost_function_with_alpha(X, Y, C, A)
 
-  newC, cost_history = func.gradient_descent(X, Y, C, alpha, 1000000)
+  newC, newA, cost_history = func.gradient_descent_with_alpha(X, Y, C, A, alpha, 1000000)
 
   Y_pred = TX.dot(newC)
   print(np.round(newC, decimals=4))

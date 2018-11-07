@@ -23,7 +23,7 @@ class wine_regression:
   x0 = np.ones(m)
   X = np.insert(f, 0, values=x0, axis=1)
   C = np.zeros(12)
-  alpha = 0.0005
+  alpha = 0.0003
 
   test_len = len(t)
   tx0 = np.ones(test_len)

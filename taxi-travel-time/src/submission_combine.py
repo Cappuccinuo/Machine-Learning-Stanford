@@ -14,7 +14,7 @@ def combine():
 
   print('creating submission 2 ...')
   df['TRAVEL_TIME'] = df['F1']
-  df['TRAVEL_TIME'] = np.mean(df[['F0','F1']], axis=1)
+  df['TRAVEL_TIME'] = np.mean(df[['F0','F1']], axis=1) + 100
 
   submission = df[['TRIP_ID','TRAVEL_TIME']]
   submission.to_csv('final_submission.csv', index = False)

@@ -15,4 +15,5 @@ os.rename('my_submission_V5.csv', 'my_submission_V4.csv')
 make_submission_xgboost()
 concat()
 os.rename('my_submission_V5.csv', 'my_submission_V6.csv')
+# Get mean
 combine()

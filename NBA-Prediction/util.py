@@ -120,9 +120,9 @@ def LastNGamesPer(ScoresData, N):
             awayTeam = ScoresData[game][2]
             awayScore = ScoresData[game][3]
             if (homeTeam == team):
-                result[game][0] = np.sum(wins) / N
+                result[game][0] = np.mean(wins)
             else:
-                result[game][1] = np.sum(wins) / N
+                result[game][1] = np.mean(wins)
 
             if (homeTeam == team and homeScore > awayScore):
                 wins[k] = 1
@@ -131,7 +131,7 @@ def LastNGamesPer(ScoresData, N):
             else :
                 wins[k] = 0
             k += 1
-            if (k >= N):
+            if (k == N):
                 k = 0
     return result
 
@@ -156,9 +156,7 @@ def HomeVictoriesPer(ScoresData):
                 wins += 1
 
             currGame = teamGames[i]
-            currHomeTeam = ScoresData[currGame][0]
-            if (currHomeTeam == team):
-                result[currGame] = wins / i
+            result[currGame] = wins / i
     return result
 
 def VisitorVictoriesPer(ScoresData):
@@ -182,9 +180,7 @@ def VisitorVictoriesPer(ScoresData):
                 wins += 1
 
             currGame = teamGames[i]
-            currAwayTeam = ScoresData[currGame][2]
-            if (currAwayTeam == team):
-                result[currGame] = wins / i
+            result[currGame] = wins / i
     return result
 
 def HistoryTeams(ScoresData):

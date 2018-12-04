@@ -3,6 +3,8 @@ import pandas as pd
 from util import TeamsVictoriesPer
 from util import PointsDiff
 from util import LastNGamesPer
+from util import VisitorVictoriesPer
+from util import HomeVictoriesPer
 
 base = 2014
 start = 2014
@@ -70,6 +72,29 @@ for year in range(start, end + 1):
       elif (sameRate):
         impredictable += 1
   matrix[year - base][2] = (correctPred + impredictable / 2) / len(Scores)
+
+
+  # Prediction based on visitor team win-loss percentage as visitor
+  # and home team win-loss percentage as home
+  # before the predicted game
+
+  HVP = HomeVictoriesPer(Scores)
+  VVP = VisitorVictoriesPer(Scores)
+  correctPred = 0
+  impredictable = 0
+  for i in range(0, len(Scores)):
+    if (HVP[i] == -9999 or VVP[i] == -9999):
+      impredictable += 1
+    else:
+      homeWinCorrect = (HVP[i] > VVP[i]) and (Scores[i][1] > Scores[i][3])
+      awayWinCorrect = (VVP[i] > HVP[i]) and (Scores[i][3] > Scores[i][1])
+      sameRate = (HVP[i] == VVP[i])
+
+      if (homeWinCorrect or awayWinCorrect):
+        correctPred += 1
+      elif (sameRate):
+        impredictable += 1
+  matrix[year - base][3] = (correctPred + impredictable / 2) / len(Scores)
 
 m, n = matrix.shape
 for i in range (0, n):

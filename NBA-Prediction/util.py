@@ -134,3 +134,55 @@ def LastNGamesPer(ScoresData, N):
             if (k >= N):
                 k = 0
     return result
+
+def HomeVictoriesPer(ScoresData):
+    result = np.zeros((len(ScoresData), 1))
+    for i in range(0, len(ScoresData)):
+        result[i] = -9999
+
+    for team in range(1, 31):
+        df = pd.DataFrame(ScoresData)
+        teamGames = df.index[(df[0] == team)].tolist()
+        teamGames.sort()
+        wins = 0
+
+        for i in range(1, len(teamGames)):
+            prevGame = teamGames[i - 1]
+            homeTeam = ScoresData[prevGame][0]
+            homeScore = ScoresData[prevGame][1]
+            awayTeam = ScoresData[prevGame][2]
+            awayScore = ScoresData[prevGame][3]
+            if (homeTeam == team and homeScore > awayScore):
+                wins += 1
+
+            currGame = teamGames[i]
+            currHomeTeam = ScoresData[currGame][0]
+            if (currHomeTeam == team):
+                result[currGame] = wins / i
+    return result
+
+def VisitorVictoriesPer(ScoresData):
+    result = np.zeros((len(ScoresData), 1))
+    for i in range(0, len(ScoresData)):
+        result[i] = -9999
+
+    for team in range(1, 31):
+        df = pd.DataFrame(ScoresData)
+        teamGames = df.index[(df[2] == team)].tolist()
+        teamGames.sort()
+        wins = 0
+
+        for i in range(1, len(teamGames)):
+            prevGame = teamGames[i - 1]
+            homeTeam = ScoresData[prevGame][0]
+            homeScore = ScoresData[prevGame][1]
+            awayTeam = ScoresData[prevGame][2]
+            awayScore = ScoresData[prevGame][3]
+            if (awayTeam == team and awayScore > homeScore):
+                wins += 1
+
+            currGame = teamGames[i]
+            currAwayTeam = ScoresData[currGame][2]
+            if (currAwayTeam == team):
+                result[currGame] = wins / i
+    return result

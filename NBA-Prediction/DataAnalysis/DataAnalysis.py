@@ -6,6 +6,7 @@ from util import LastNGamesPer
 from util import VisitorVictoriesPer
 from util import HomeVictoriesPer
 from util import HistoryTeams
+from util import plotDataToTable
 
 base = 2014
 start = 2014
@@ -120,6 +121,12 @@ m, n = matrix.shape
 for i in range (0, n):
   matrix[m - 1][i] = np.mean(matrix[:m - 1, i])
 print(matrix)
+# matrix = [[0.6495935, 0.65243902, 0.59593496, 0.62926829, 0.58773181],
+#  [0.65650407, 0.67073171, 0.61422764, 0.65081301, 0.61951909],
+#  [0.59796748, 0.60650407, 0.56626016, 0.5995935, 0.55827338],
+#  [0.62317073, 0.64268293, 0.58211382, 0.62479675, 0.58981612],
+#  [0.63180894, 0.64308943, 0.58963415, 0.62611789,0.5888351]]
+# plotDataToTable(matrix)
 
 
 

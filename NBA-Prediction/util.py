@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 teamToIndex = {
     'ATL': 1,
     'BOS': 2,
@@ -222,3 +223,46 @@ def HistoryTeams(ScoresData):
         for j in range(0, 30):
             result[j][i] = -result[i][j]
     return HT, result
+
+def plotDataToTable(matrix):
+    columns = ('A', 'B', 'C', 'D', 'E')
+    rows = ['2014-15', '2015-16', '2016-17', '2017-18', 'mean']
+    values = np.arange(0, 1, 0.1)
+    value_increment = 0.1
+
+    # Get some pastel shades for the colors
+    colors = plt.cm.BuPu(np.linspace(0, 0.5, len(rows)))
+    n_rows = len(matrix)
+
+    index = np.arange(len(columns)) + 0.3
+    bar_width = 0.4
+
+    # Initialize the vertical-offset for the stacked bar chart.
+    y_offset = np.zeros(len(columns))
+
+    # Plot bars and create text labels for the table
+    cell_text = []
+    for row in range(n_rows):
+        plt.bar(index, matrix[row], bar_width, bottom=y_offset, color=colors[row])
+        y_offset = y_offset + matrix[row]
+        cell_text.append(['%.1f' % (x) for x in y_offset])
+    # Reverse colors and text labels to display the last value at the top.
+    colors = colors[::-1]
+    cell_text.reverse()
+
+    # Add a table at the bottom of the axes
+    the_table = plt.table(cellText=cell_text,
+                          rowLabels=rows,
+                          rowColours=colors,
+                          colLabels=columns,
+                          loc='bottom')
+
+    # Adjust layout to make room for the table:
+    plt.subplots_adjust(left=0.2, bottom=0.2)
+
+    plt.ylabel("Prediction Accuracy".format(value_increment))
+    plt.yticks(values * value_increment, ['%d' % val for val in values])
+    plt.xticks([])
+    plt.title('Data Analysis')
+
+    plt.show()

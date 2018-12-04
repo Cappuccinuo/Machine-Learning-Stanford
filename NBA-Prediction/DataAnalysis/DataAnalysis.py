@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 from util import TeamsVictoriesPer
 from util import PointsDiff
+from util import LastNGamesPer
 
 base = 2014
 start = 2014
@@ -50,7 +51,25 @@ for year in range(start, end + 1):
         impredictable += 1
   matrix[year - base][1] = (correctPred + impredictable / 2) / len(Scores)
 
+  # Prediction based on win-loss percentage in the previous N games of both teams
+  # before the predicted game
+  N = 8
+  LNGP = LastNGamesPer(Scores, N)
+  correctPred = 0
+  impredictable = 0
+  for i in range(0, len(Scores)):
+    if (LNGP[i][0] == -9999 or LNGP[i][1] == -9999):
+      impredictable += 1
+    else:
+      homeWinCorrect = (LNGP[i][0] > LNGP[i][1]) and (Scores[i][1] > Scores[i][3])
+      awayWinCorrect = (LNGP[i][1] > LNGP[i][0]) and (Scores[i][3] > Scores[i][1])
+      sameRate = (LNGP[i][0] == LNGP[i][1])
 
+      if (homeWinCorrect or awayWinCorrect):
+        correctPred += 1
+      elif (sameRate):
+        impredictable += 1
+  matrix[year - base][2] = (correctPred + impredictable / 2) / len(Scores)
 
 m, n = matrix.shape
 for i in range (0, n):

@@ -89,3 +89,48 @@ def PointsDiff(ScoresData):
             else:
                 result[currGame][1] = teamPD / i
     return result
+
+def LastNGamesPer(ScoresData, N):
+    result = np.zeros((len(ScoresData), 2))
+    result[:, :] = -9999
+
+    for team in range(1, 31):
+        df = pd.DataFrame(ScoresData)
+        teamGames = df.index[(df[0] == team) | (df[2] == team)].tolist()
+        teamGames.sort()
+        wins = np.zeros((N, 1))
+
+        for i in range(0, N):
+            game = teamGames[i]
+            homeTeam = ScoresData[game][0]
+            homeScore = ScoresData[game][1]
+            awayTeam = ScoresData[game][2]
+            awayScore = ScoresData[game][3]
+
+            if (homeTeam == team and homeScore > awayScore) :
+                wins[i] = 1
+            elif (awayTeam == team and awayScore > homeScore):
+                wins[i] = 1
+
+        k = 0
+        for i in range(N, len(teamGames)):
+            game = teamGames[i]
+            homeTeam = ScoresData[game][0]
+            homeScore = ScoresData[game][1]
+            awayTeam = ScoresData[game][2]
+            awayScore = ScoresData[game][3]
+            if (homeTeam == team):
+                result[game][0] = np.sum(wins) / N
+            else:
+                result[game][1] = np.sum(wins) / N
+
+            if (homeTeam == team and homeScore > awayScore):
+                wins[k] = 1
+            elif (awayTeam == team and awayScore > homeScore):
+                wins[k] = 1
+            else :
+                wins[k] = 0
+            k += 1
+            if (k >= N):
+                k = 0
+    return result

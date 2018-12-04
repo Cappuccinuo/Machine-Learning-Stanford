@@ -61,3 +61,31 @@ def TeamsVictoriesPer(ScoresData):
         else :
             result[currGame][1] = wins / i
   return result
+
+def PointsDiff(ScoresData):
+    result = np.zeros((len(ScoresData), 2))
+    result[:, :] = -9999
+
+    for team in range(1, 31):
+        df = pd.DataFrame(ScoresData)
+        teamGames = df.index[(df[0] == team) | (df[2] == team)].tolist()
+        teamGames.sort()
+        teamPD = 0
+
+        for i in range(1, len(teamGames)):
+            prevGame = teamGames[i - 1]
+            homeTeam = ScoresData[prevGame][0]
+            homeScore = ScoresData[prevGame][1]
+            awayTeam = ScoresData[prevGame][2]
+            awayScore = ScoresData[prevGame][3]
+            if (homeTeam == team):
+                teamPD += homeScore - awayScore;
+            elif (awayTeam == team):
+                teamPD += awayScore - homeScore;
+            currGame = teamGames[i]
+            currHomeTeam = ScoresData[currGame][0]
+            if (currHomeTeam == team):
+                result[currGame][0] = teamPD / i
+            else:
+                result[currGame][1] = teamPD / i
+    return result

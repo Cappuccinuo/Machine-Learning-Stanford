@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 from util import TeamsVictoriesPer
+from util import PointsDiff
 
 base = 2014
 start = 2014
@@ -30,6 +31,27 @@ for year in range(start, end + 1):
       elif (sameRate):
         impredictable += 1
   matrix[year - base][0] = (correctPred + impredictable / 2) / len(Scores)
+
+  # Prediction based on Teams point differential per game before the predicted game
+  PD = PointsDiff(Scores)
+  correctPred = 0
+  impredictable = 0
+  for i in range(0, len(Scores)):
+    if (PD[i][0] == -9999 or PD[i][1] == -9999):
+      impredictable += 1
+    else:
+      homeWinCorrect = (PD[i][0] > PD[i][1]) and (Scores[i][1] > Scores[i][3])
+      awayWinCorrect = (PD[i][1] > PD[i][0]) and (Scores[i][3] > Scores[i][1])
+      sameRate = (PD[i][0] == PD[i][1])
+
+      if (homeWinCorrect or awayWinCorrect):
+        correctPred += 1
+      elif (sameRate):
+        impredictable += 1
+  matrix[year - base][1] = (correctPred + impredictable / 2) / len(Scores)
+
+
+
 m, n = matrix.shape
 for i in range (0, n):
   matrix[m - 1][i] = np.mean(matrix[:m - 1, i])

@@ -5,6 +5,7 @@ from util import PointsDiff
 from util import LastNGamesPer
 from util import VisitorVictoriesPer
 from util import HomeVictoriesPer
+from util import HistoryTeams
 
 base = 2014
 start = 2014
@@ -95,6 +96,25 @@ for year in range(start, end + 1):
       elif (sameRate):
         impredictable += 1
   matrix[year - base][3] = (correctPred + impredictable / 2) / len(Scores)
+
+  # Predictions based on the results of previous games between the teams
+  HT, SeasonStanding = HistoryTeams(Scores)
+  correctPred = 0
+  impredictable = 0
+  for i in range(0, len(Scores)):
+    if (HT[i] == -9999):
+      impredictable += 1
+    else:
+      homeWinCorrect = (HT[i] > 0) and (Scores[i][1] > Scores[i][3])
+      awayWinCorrect = (HT[i] < 0) and (Scores[i][3] > Scores[i][1])
+      sameRate = (HT[i] == 0)
+
+      if (homeWinCorrect or awayWinCorrect):
+        correctPred += 1
+      elif (sameRate):
+        impredictable += 1
+
+  matrix[year - base][4] = (correctPred) / (len(Scores) - impredictable)
 
 m, n = matrix.shape
 for i in range (0, n):

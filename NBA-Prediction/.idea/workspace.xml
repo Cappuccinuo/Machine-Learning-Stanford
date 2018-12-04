@@ -11,7 +11,7 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/NBA_Prediction$TeamsVictoriesPer.coverage" NAME="TeamsVictoriesPer Coverage Results" MODIFIED="1543891732708" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/DataAnalysis" />
-    <SUITE FILE_PATH="coverage/NBA_Prediction$DataAnalysis.coverage" NAME="DataAnalysis Coverage Results" MODIFIED="1543899105789" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/DataAnalysis" />
+    <SUITE FILE_PATH="coverage/NBA_Prediction$DataAnalysis.coverage" NAME="DataAnalysis Coverage Results" MODIFIED="1543901362580" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/DataAnalysis" />
     <SUITE FILE_PATH="coverage/NBA_Prediction$getScoresRegularTxt.coverage" NAME="getScoresRegularTxt Coverage Results" MODIFIED="1543889904059" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FileEditorManager">
@@ -31,15 +31,19 @@
       <file leaf-file-name="util.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/util.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="902">
-              <caret line="164" column="37" lean-forward="false" selection-start-line="164" selection-start-column="37" selection-end-line="164" selection-end-column="37" />
+            <state relative-caret-position="42">
+              <caret line="190" column="31" lean-forward="false" selection-start-line="190" selection-start-column="31" selection-end-line="190" selection-end-column="31" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
                 <element signature="e#53#497#0" expanded="false" />
-                <element signature="e#1746#2375#0" expanded="false" />
-                <element signature="e#2537#3828#0" expanded="false" />
+                <element signature="e#536#1405#0" expanded="false" />
+                <element signature="e#631#1389#0" expanded="false" />
+                <element signature="e#812#1389#0" expanded="false" />
+                <element signature="e#2433#3846#0" expanded="false" />
                 <element signature="e#2740#3115#0" expanded="false" />
                 <element signature="e#3186#3828#0" expanded="false" />
+                <element signature="e#3886#4707#0" expanded="false" />
+                <element signature="e#4750#5571#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -48,8 +52,8 @@
       <file leaf-file-name="DataAnalysis.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/DataAnalysis/DataAnalysis.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="149">
-              <caret line="78" column="29" lean-forward="true" selection-start-line="76" selection-start-column="4" selection-end-line="78" selection-end-column="29" />
+            <state relative-caret-position="374">
+              <caret line="111" column="27" lean-forward="false" selection-start-line="111" selection-start-column="27" selection-end-line="111" selection-end-column="27" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -65,8 +69,8 @@
         <option value="$PROJECT_DIR$/LR.py" />
         <option value="$PROJECT_DIR$/getScoresRegularTxt.py" />
         <option value="$PROJECT_DIR$/DataAnalysis/TeamsVictoriesPer.py" />
-        <option value="$PROJECT_DIR$/DataAnalysis/DataAnalysis.py" />
         <option value="$PROJECT_DIR$/util.py" />
+        <option value="$PROJECT_DIR$/DataAnalysis/DataAnalysis.py" />
       </list>
     </option>
   </component>
@@ -365,23 +369,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/util.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="902">
-          <caret line="164" column="37" lean-forward="false" selection-start-line="164" selection-start-column="37" selection-end-line="164" selection-end-column="37" />
+        <state relative-caret-position="42">
+          <caret line="190" column="31" lean-forward="false" selection-start-line="190" selection-start-column="31" selection-end-line="190" selection-end-column="31" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
             <element signature="e#53#497#0" expanded="false" />
-            <element signature="e#1746#2375#0" expanded="false" />
-            <element signature="e#2537#3828#0" expanded="false" />
+            <element signature="e#536#1405#0" expanded="false" />
+            <element signature="e#631#1389#0" expanded="false" />
+            <element signature="e#812#1389#0" expanded="false" />
+            <element signature="e#2433#3846#0" expanded="false" />
             <element signature="e#2740#3115#0" expanded="false" />
             <element signature="e#3186#3828#0" expanded="false" />
+            <element signature="e#3886#4707#0" expanded="false" />
+            <element signature="e#4750#5571#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/DataAnalysis/DataAnalysis.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="78" column="29" lean-forward="true" selection-start-line="76" selection-start-column="4" selection-end-line="78" selection-end-column="29" />
+        <state relative-caret-position="374">
+          <caret line="111" column="27" lean-forward="false" selection-start-line="111" selection-start-column="27" selection-end-line="111" selection-end-column="27" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>

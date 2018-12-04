@@ -186,3 +186,43 @@ def VisitorVictoriesPer(ScoresData):
             if (currAwayTeam == team):
                 result[currGame] = wins / i
     return result
+
+def HistoryTeams(ScoresData):
+    result = np.zeros((30, 30))
+    HT = np.zeros((len(ScoresData), 1))
+    for i in range (0, len(ScoresData)):
+        HT[i] = -9999
+    for t1 in range(1, 31):
+        for t2 in range(t1 + 1, 31):
+            team1 = t1
+            team2 = t2
+            df = pd.DataFrame(ScoresData)
+            teamGames = df.index[(((df[0] == team1) & (df[2] == team2))
+                                 | ((df[0] == team2) & (df[2] == team1)))].tolist()
+            teamGames.sort()
+            winsTeam1 = 0
+
+            for i in range(1, len(teamGames)):
+                prevGame = teamGames[i - 1]
+                homeTeam = ScoresData[prevGame][0]
+                homeScore = ScoresData[prevGame][1]
+                awayTeam = ScoresData[prevGame][2]
+                awayScore = ScoresData[prevGame][3]
+                if (homeTeam == team1):
+                    if (homeScore > awayScore):
+                        winsTeam1 += 1
+                elif (awayTeam == team1):
+                    if (awayScore > homeScore):
+                        winsTeam1 += 1
+                currGame = teamGames[i]
+                currHomeTeam = ScoresData[currGame][0]
+                currAwayTeam = ScoresData[currGame][2]
+                if (currHomeTeam == team1):
+                    HT[currGame] = winsTeam1 - (i - winsTeam1)
+                elif (currAwayTeam == team1):
+                    HT[currGame] = -(winsTeam1 - (i - winsTeam1))
+                result[team1 - 1][team2 - 1] = (winsTeam1 - (i - winsTeam1))
+    for i in range(0, 30):
+        for j in range(0, 30):
+            result[j][i] = -result[i][j]
+    return HT, result

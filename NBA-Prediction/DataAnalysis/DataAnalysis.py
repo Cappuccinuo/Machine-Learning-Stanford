@@ -127,7 +127,7 @@ for year in range(start, end + 1):
   df = pd.concat(frames, axis=1)
   df.columns = ['homeIndex', 'homeScore', 'awayIndex', 'awayScore', 'HTVP', 'ATVP', 'HLNGP', 'ALNGP', 'HVP', 'VVP', 'HPD', 'APD']
   df['rst'] = (df['homeScore'] > df['awayScore']) * 1
-  fn = str(year) + '-' + str(year + 1)[2:] + '_featrures.csv'
+  fn = str(year) + '-' + str(year + 1)[2:] + '_features.csv'
   df.to_csv(fn)
 
 # m, n = matrix.shape

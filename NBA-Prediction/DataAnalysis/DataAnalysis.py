@@ -7,6 +7,12 @@ from util import VisitorVictoriesPer
 from util import HomeVictoriesPer
 from util import HistoryTeams
 
+def process_row(row):
+  a = row['homeScore']
+  b = row['awayScore']
+  data =[1] if a > b else [-1]
+  return pd.Series(np.array(data, dtype=int))
+
 base = 2014
 start = 2014
 end = 2017
@@ -118,15 +124,17 @@ for year in range(start, end + 1):
 
   matrix[year - base][4] = (correctPred) / (len(Scores) - impredictable)
 
-  df1 = pd.DataFrame(TVP)
-  df2 = pd.DataFrame(LNGP)
-  df3 = pd.DataFrame(HVP)
-  df4 = pd.DataFrame(VVP)
-  df5 = pd.DataFrame(PD)
+  df1 = pd.DataFrame(HVP)
+  df2 = pd.DataFrame(VVP)
+  df3 = pd.DataFrame(TVP)
+  df4 = pd.DataFrame(PD)
+  df5 = pd.DataFrame(LNGP)
   frames = [df, df1, df2, df3, df4, df5]
   df = pd.concat(frames, axis=1)
-  df.columns = ['homeIndex', 'homeScore', 'awayIndex', 'awayScore', 'HTVP', 'ATVP', 'HLNGP', 'ALNGP', 'HVP', 'VVP', 'HPD', 'APD']
-  df['rst'] = (df['homeScore'] > df['awayScore']) * 1
+  df.columns = ['homeIndex', 'homeScore', 'awayIndex', 'awayScore', 'HVP', 'VVP', 'HTVP', 'ATVP', 'HPD', 'APD', 'HLNGP', 'ALNGP']
+  ds = df.apply(process_row, axis = 1)
+  ds.columns = ['rst']
+  df = df.join(ds)
   fn = str(year) + '-' + str(year + 1)[2:] + '_features.csv'
   df.to_csv(fn)
 

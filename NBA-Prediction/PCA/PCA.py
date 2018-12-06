@@ -2,6 +2,8 @@ import pandas as pd
 import numpy as np
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
+import scipy.io as sio
+from scipy import linalg
 
 start = 2014
 end = 2017
@@ -27,23 +29,35 @@ for year in range(start, end + 1):
     sumVec[0][i] = np.sum(df[feature])
   meanVector = np.transpose(sumVec)
 
-  aux = np.zeros((col, col))
-  for i in range(0, K):
-    aux = aux + (np.transpose(df.iloc[i, :].values) - meanVector) * np.transpose(np.transpose(df.iloc[i, :].values) - meanVector)
-  aux = aux / K
+  aux = np.ndarray((col, col))
+  for i in range(0, 10):
+    print(i)
+    print((np.transpose(df.iloc[i, :].values) - meanVector) * (np.transpose(np.transpose(df.iloc[i, :].values) - meanVector)))
+    aux = aux + (np.transpose(df.iloc[i, :].values) - meanVector) * (np.transpose(np.transpose(df.iloc[i, :].values) - meanVector))
+  C = aux / K
 
-  u, s, vh = np.linalg.svd(aux, full_matrices=False)
-  smat = np.zeros((col, col))
-  smat[:col, : col] = np.diag(s)
 
-  r = 3
-  Vp = u[:, 0 : r]
-  Y = np.transpose(np.dot(np.transpose(Vp), np.transpose(df.values)))
+  adict = {}
+  adict['C'] = C
+  sio.savemat(str(year) + '.mat', adict)
 
-  principalDf = pd.DataFrame(data=Y, columns=['pc1', 'pc2', 'pc3'])
-  finalDf = pd.concat([principalDf, CompleteFeatureGames['rst']], axis=1)
-  fn = str(year) + '-' + str(year + 1)[2:] + '_pca_features.csv'
-  finalDf.to_csv(fn)
+  # u, s, vh = linalg.svd(C, lapack_driver='gesvd')
+
+  # smat = np.zeros((col, col))
+  # smat[:col, : col] = np.diag(s)
+
+  # r = 3
+  # Vp = u[:, 0 : r]
+  #
+  # Y = np.transpose(np.dot(np.transpose(Vp), np.transpose(df.values)))
+  #
+  # principalDf = pd.DataFrame(data=Y, columns=['pc1', 'pc2', 'pc3'])
+  # finalDf = pd.concat([principalDf, CompleteFeatureGames['rst']], axis=1)
+  # fn = str(year) + '-' + str(year + 1)[2:] + '_pca_features.csv'
+  # finalDf.to_csv(fn)
+
+
+
 
   # features = ['HTVP', 'ATVP', 'HLNGP', 'ALNGP', 'HVP', 'VVP', 'HPD', 'APD']
   # x = CompleteFeatureGames.loc[:, features].values

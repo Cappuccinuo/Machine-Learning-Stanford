@@ -25,8 +25,9 @@ model.add(Dense(16, activation='relu'))
 model.add(Dense(1, activation='sigmoid'))
 
 # Compile model
-# sgd = optimizers.SGD(lr=0.1, decay=1e-6, momentum=0.8, nesterov=True)
-model.compile(loss='binary_crossentropy', optimizer='Adam', metrics=['accuracy'])
+sgd = optimizers.SGD(lr=0.1, decay=1e-6, momentum=0.8, nesterov=True)
+model.compile(loss='binary_crossentropy', optimizer=sgd, metrics=['accuracy'])
+# model.compile(loss='binary_crossentropy', optimizer='Adam', metrics=['accuracy'])
 
 # Fit the model
 model.fit(X, Y, epochs=500, batch_size=50)

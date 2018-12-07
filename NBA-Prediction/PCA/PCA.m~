@@ -1,11 +1,11 @@
 clear all;
 load('../Data/AllFeatureVector/All_Vectors.mat')
 
+CompleteFeaturesGames = [0 0 0 0 0 0 0 0 0];
 s = 2010;
 e = 2017;
 base = 2010;
 for year=s:e - 1
-    CompleteFeaturesGames = [0 0 0 0 0 0 0 0 0];
     j = year - base + 1;
     [a,b] = find( FeatureVector{j}(:,:) == -9999);
     minGame(j) = max(a); % find the last game that dont have all informations
@@ -34,8 +34,7 @@ for year=s:e - 1
     % Project each feature vector x(k) onto the r-dimensional principle subspace
     Y = (Vp'*data')';
     FeaturesLabel = horzcat(Y,CompleteFeaturesGames(:,9));
-    path = '../Data/PCAVector/';
-    name = strcat(path, int2str(year), 'FeaturesPCA');
+    name = strcat(int2str(year), 'FeaturesPCA');
     save(name,'FeaturesLabel');
 end
 

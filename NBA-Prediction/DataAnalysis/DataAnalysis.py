@@ -1,3 +1,7 @@
+'''
+2nd step
+'''
+
 import numpy as np
 import pandas as pd
 from util import TeamsVictoriesPer
@@ -13,16 +17,15 @@ def process_row(row):
   data =[1] if a > b else [-1]
   return pd.Series(np.array(data, dtype=int))
 
-base = 2014
-start = 2014
+base = 2010
+start = 2010
 end = 2017
 
 matrix = np.zeros((end - start + 2, 5))
 FeatureVector = np.ndarray(shape=(1, 4))
 
 for year in range(start, end + 1):
-  path = '/Users/cappuccinuo/Documents/GitHub/Machine-Learning-Stanford/NBA-Prediction/Data/' \
-         + str(year) + '-' + str(year + 1)[2:] + '/ScoresRegular' + str(year) + '.txt'
+  path = '../Data/RegularScoreTxt/ScoresRegular' + str(year) + '.txt'
   Scores = np.loadtxt(path, delimiter=' ')
   df = pd.DataFrame(Scores)
 
@@ -136,18 +139,21 @@ for year in range(start, end + 1):
   ds.columns = ['rst']
   df = df.join(ds)
   fn = str(year) + '-' + str(year + 1)[2:] + '_features.csv'
-  df.to_csv(fn)
+  df.to_csv('../Data/SeperateFeatures/' + fn, index=False)
 
-# m, n = matrix.shape
-# for i in range (0, n):
-#   matrix[m - 1][i] = np.mean(matrix[:m - 1, i])
-# print(matrix)
-# matrix = [[0.6495935, 0.65243902, 0.59593496, 0.62926829, 0.58773181],
-#  [0.65650407, 0.67073171, 0.61422764, 0.65081301, 0.61951909],
-#  [0.59796748, 0.60650407, 0.56626016, 0.5995935, 0.55827338],
-#  [0.62317073, 0.64268293, 0.58211382, 0.62479675, 0.58981612],
-#  [0.63180894, 0.64308943, 0.58963415, 0.62611789,0.5888351]]
-# plotDataToTable(matrix)
+m, n = matrix.shape
+for i in range (0, n):
+  matrix[m - 1][i] = np.mean(matrix[:m - 1, i])
+print(matrix)
+# [[0.65243902 0.65813008 0.61463415 0.65853659 0.58123249]
+#  [0.63080808 0.62626263 0.58484848 0.64343434 0.60554371]
+#  [0.64593496 0.65894309 0.61544715 0.64390244 0.59123055]
+#  [0.65243902 0.64227642 0.61585366 0.64186992 0.56795422]
+#  [0.66788618 0.67113821 0.61300813 0.64878049 0.58773181]
+#  [0.65813008 0.65691057 0.61300813 0.66178862 0.61951909]
+#  [0.60650407 0.62195122 0.59186992 0.61869919 0.55827338]
+#  [0.63495935 0.62845528 0.61219512 0.63943089 0.58981612]
+#  [0.6436376  0.64550844 0.60760809 0.64455531 0.58766267]]
 
 
 

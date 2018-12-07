@@ -1,9 +1,9 @@
 clear all;
-load('../Data/AllFeatureVector/All_Vectors.mat')
-
-s = 2010;
-e = 2017;
-base = 2010;
+%load('../Data/AllFeatureVector/All_Vectors.mat')
+load('../Data/AllFeatureVector/2017-2018_Vectors.mat')
+s = 2017;
+e = 2018;
+base = 2017;
 for year=s:e - 1
     CompleteFeaturesGames = [0 0 0 0 0 0 0 0 0];
     j = year - base + 1;

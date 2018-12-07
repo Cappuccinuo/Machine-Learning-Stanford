@@ -1,0 +1,31 @@
+% Aload = load('../Data/PCAVector/2010FeaturesPCA.mat');
+% Bload = load('../Data/PCAVector/2011FeaturesPCA.mat');
+% Cload = load('../Data/PCAVector/2012FeaturesPCA.mat');
+% Dload = load('../Data/PCAVector/2013FeaturesPCA.mat');
+% Eload = load('../Data/PCAVector/2014FeaturesPCA.mat');
+% Fload = load('../Data/PCAVector/2015FeaturesPCA.mat');
+% Gload = load('../Data/PCAVector/2016FeaturesPCA.mat');
+% a = Aload.FeaturesLabel;
+% b = Bload.FeaturesLabel;
+% c = Cload.FeaturesLabel;
+% d = Dload.FeaturesLabel;
+% e = Eload.FeaturesLabel;
+% f = Fload.FeaturesLabel;
+% g = Gload.FeaturesLabel;
+% FeaturesLabel = [a; b; c; d; e; f; g];
+% save('../Data/PCAVector/all_pca_vector_2010-2017.mat', 'FeaturesLabel');
+% 
+% FileData = load('../Data/PCAVector/all_pca_vector_2010-2017.mat');
+% csvwrite('../Data/PCAFeatures/2010.csv', a);
+% csvwrite('../Data/PCAFeatures/2011.csv', b);
+% csvwrite('../Data/PCAFeatures/2012.csv', c);
+% csvwrite('../Data/PCAFeatures/2013.csv', d);
+% csvwrite('../Data/PCAFeatures/2014.csv', e);
+% csvwrite('../Data/PCAFeatures/2015.csv', f);
+% csvwrite('../Data/PCAFeatures/2016.csv', g);
+% csvwrite('../Data/PCAFeatures/all_pca_2010-2017.csv', FileData.FeaturesLabel);
+
+Hload = load('../Data/PCAVector/2017FeaturesPCA.mat');
+h = Hload.FeaturesLabel;
+FeaturesLabel = [h];
+csvwrite('../Data/PCAFeatures/2017.csv', FeaturesLabel);

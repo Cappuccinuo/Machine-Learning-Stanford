@@ -18,28 +18,29 @@ for year in range(start, end + 1):
                           (df['HPD'] == -9999) | (df['APD'] == -9999)].tolist()
   minGame = max(invalidGames)
   CompleteFeatureGames = df.iloc[minGame + 1 : , 5 : ]
-
-  CompleteFeatureGames = CompleteFeatureGames.reset_index(drop=True)
-  df = CompleteFeatureGames.drop(columns=['rst'])
-  K = len(df)
-  col = df.shape[1]
-  sumVec = np.zeros((1, col))
-  for i in range(0, len(df.columns)):
-    feature = df.columns[i]
-    sumVec[0][i] = np.sum(df[feature])
-  meanVector = np.transpose(sumVec)
-
-  aux = np.ndarray((col, col))
-  for i in range(0, 10):
-    print(i)
-    print((np.transpose(df.iloc[i, :].values) - meanVector) * (np.transpose(np.transpose(df.iloc[i, :].values) - meanVector)))
-    aux = aux + (np.transpose(df.iloc[i, :].values) - meanVector) * (np.transpose(np.transpose(df.iloc[i, :].values) - meanVector))
-  C = aux / K
-
-
-  adict = {}
-  adict['C'] = C
-  sio.savemat(str(year) + '.mat', adict)
+  pn = str(year) + '-' + str(year + 1)[2:] + '_' + 'valid_features.csv'
+  CompleteFeatureGames.to_csv(pn)
+  # CompleteFeatureGames = CompleteFeatureGames.reset_index(drop=True)
+  # df = CompleteFeatureGames.drop(columns=['rst'])
+  # K = len(df)
+  # col = df.shape[1]
+  # sumVec = np.zeros((1, col))
+  # for i in range(0, len(df.columns)):
+  #   feature = df.columns[i]
+  #   sumVec[0][i] = np.sum(df[feature])
+  # meanVector = np.transpose(sumVec)
+  #
+  # aux = np.ndarray((col, col))
+  # for i in range(0, 10):
+  #   print(i)
+  #   print((np.transpose(df.iloc[i, :].values) - meanVector) * (np.transpose(np.transpose(df.iloc[i, :].values) - meanVector)))
+  #   aux = aux + (np.transpose(df.iloc[i, :].values) - meanVector) * (np.transpose(np.transpose(df.iloc[i, :].values) - meanVector))
+  # C = aux / K
+  #
+  #
+  # adict = {}
+  # adict['C'] = C
+  # sio.savemat(str(year) + '.mat', adict)
 
   # u, s, vh = linalg.svd(C, lapack_driver='gesvd')
 

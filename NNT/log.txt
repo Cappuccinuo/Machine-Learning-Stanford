@@ -1,0 +1,8 @@
+1
+model = Sequential()
+model.add(Dense(3, input_dim=8, activation='relu'))
+model.add(Dense(8, activation='relu'))
+model.add(Dense(1, activation='sigmoid'))
+model.compile(loss='binary_crossentropy', optimizer='Adam', metrics=['accuracy'])
+model.fit(X, Y, epochs=1000, batch_size=10)
+67.52%

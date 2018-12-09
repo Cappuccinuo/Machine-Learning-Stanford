@@ -1,9 +1,9 @@
 clear all;
-%load('../Data/AllFeatureVector/All_Vectors.mat')
-load('../Data/AllFeatureVector/2017-2018_Vectors.mat')
-s = 2017;
-e = 2018;
-base = 2017;
+load('../Data/AllFeatureVector/All_Vectors.mat')
+%load('../Data/AllFeatureVector/2017-2018_Vectors.mat')
+s = 2010;
+e = 2017;
+base = 2010;
 for year=s:e - 1
     CompleteFeaturesGames = [0 0 0 0 0 0 0 0 0];
     j = year - base + 1;
@@ -26,7 +26,7 @@ for year=s:e - 1
     % Compute Eigen Vectors and Values
     % U columns are eigenvectors and S has the eigenvalues
     [U,S,V] = svd(C);
-
+    
     %Principal component analysis r=3
     r=3;
     Vp = U(:,1:r);

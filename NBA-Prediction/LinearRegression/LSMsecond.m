@@ -1,5 +1,5 @@
 clear all;
-load ('../Data/PCAVector/all_pca_vector_2010-2018.mat')
+load ('../Data/PCAVector/all_pca_vector_2010-2017.mat')
 FeatureVectorsTr = FeaturesLabel;
 w(1) = 0;
 w(2) = 0;

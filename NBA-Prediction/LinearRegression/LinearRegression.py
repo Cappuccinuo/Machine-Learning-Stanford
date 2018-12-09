@@ -3,17 +3,17 @@ import numpy as np
 myPath = '../Data/PCAFeatures/'
 w = np.zeros(4)
 
-w[0] = 0.0785
-w[1] = -0.0773
-w[2] = 0.0532
-w[3] = -0.0180
+w[0] = 0.0803098784764532
+w[1] = -0.0765777889768009
+w[2] = 0.0586636125930068
+w[3] = -0.0291996591432804
 
 correct = 0
 impredictable = 0
 
-start = 2010
-end = 2014
-base = 2010
+start = 2017
+end = 2017
+base = 2017
 p = np.zeros(end - start + 1)
 
 for year in range(start, end + 1):
